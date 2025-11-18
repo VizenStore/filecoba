@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat AI - Edukasi Keamanan Internet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Chat AI Page -->
+    <main class="chat-page">
+        <div class="container">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-header-content">
+                        <i class="fas fa-robot"></i>
+                        <h1>Asisten Keamanan Internet AI</h1>
+                    </div>
+                    <button class="clear-chat-btn" onclick="clearChat()" title="Bersihkan Percakapan">
+                        <i class="fas fa-trash"></i> Bersihkan
+                    </button>
+                </div>
+
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message ai-message">
+                        <div class="message-text">
+                            🤖 <strong>Halo! Saya Asisten Keamanan Internet AI</strong><br><br>
+                            Saya di sini untuk membantu Anda dengan berbagai masalah keamanan internet. Silakan pilih topik yang ingin Anda pelajari dari button di bawah:
+                        </div>
+                        <div class="message-time">Sekarang</div>
+                    </div>
+                </div>
+
+                <!-- Hanya Button Suggestion, Tidak Ada Input Text -->
+                <div class="chat-suggestions">
+                    <p><strong>Pilih Topik Pembelajaran:</strong></p>
+                    <div class="suggestion-buttons">
+                        <button class="suggestion-btn" onclick="sendAIMessage('cyberbullying')">
+                            🚨 Cyberbullying
+                        </button>
+                        <button class="suggestion-btn" onclick="sendAIMessage('privasi')">
+                            🔒 Privasi Online
+                        </button>
+                        <button class="suggestion-btn" onclick="sendAIMessage('media sosial')">
+                            📱 Media Sosial
+                        </button>
+                        <button class="suggestion-btn" onclick="sendAIMessage('anak')">
+                            👶 Keamanan Anak
+                        </button>
+                        <button class="suggestion-btn" onclick="sendAIMessage('lapor')">
+                            📞 Cara Melaporkan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Menu Menyelesaikan Membaca -->
+                <div class="reading-progress" style="margin: 2rem; border-radius: 12px;">
+                    <div class="progress-checkbox">
+                        <input type="checkbox" id="read-complete-chat-ai">
+                        <label for="read-complete-chat-ai">Saya telah menggunakan dan memahami fitur Chat AI</label>
+                    </div>
+                    <a href="index.html" class="next-material-btn">Selesai Belajar →</a>
+                </div>
+            </div>
+
+            <!-- Button Kembali ke Beranda di Bawah -->
+            <a href="index.html" class="back-home-btn">
+                <i class="fas fa-arrow-left"></i>
+                Kembali ke Beranda
+            </a>
+        </div>
+    </main>
+
+    <script>
+        function sendAIMessage(topic) {
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Tambahkan pesan user (hanya dari button)
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'user-message';
+            
+            // Tampilkan teks sesuai topic
+            const topicTexts = {
+                'cyberbullying': '🚨 Tentang Cyberbullying',
+                'privasi': '🔒 Tentang Privasi Online', 
+                'media sosial': '📱 Tentang Media Sosial',
+                'anak': '👶 Tentang Keamanan Anak',
+                'lapor': '📞 Cara Melaporkan'
+            };
+            
+            userMessageDiv.innerHTML = `
+                <div class="message-text">${topicTexts[topic] || topic}</div>
+                <div class="message-time">${new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}</div>
+            `;
+            messagesContainer.appendChild(userMessageDiv);
+
+            // Scroll ke bawah
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Simulasi AI thinking
+            setTimeout(() => {
+                const aiResponse = getAIResponse(topic);
+                const aiMessageDiv = document.createElement('div');
+                aiMessageDiv.className = 'ai-message';
+                aiMessageDiv.innerHTML = `
+                    <div class="message-text">${aiResponse}</div>
+                    <div class="message-time">${new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}</div>
+                `;
+                messagesContainer.appendChild(aiMessageDiv);
+                
+                // Scroll ke bawah lagi
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+        }
+
+        function getAIResponse(topic) {
+            // Respons AI hanya untuk topik yang direkomendasikan
+            const responses = {
+                'cyberbullying': `🚨 <strong>TENTANG CYBERBULLYING</strong><br><br>
+Cyberbullying adalah perilaku berulang yang ditujukan untuk menakuti, membuat marah, atau mempermalukan seseorang melalui media digital.<br><br>
+<strong>📋 YANG HARUS DILAKUKAN:</strong><br><br>
+✅ <strong>Simpan Bukti</strong><br>
+• Screenshot pesan, komentar, atau konten yang menyinggung<br>
+• Catat tanggal dan waktu kejadian<br>
+• Simpan username pelaku<br><br>
+✅ <strong>Tindakan Langsung</strong><br>
+• Blokir pelaku di semua platform<br>
+• Gunakan fitur "Laporkan" di media sosial<br>
+• Jangan membalas atau menanggapi<br><br>
+✅ <strong>Cari Bantuan</strong><br>
+• Bicara dengan orang tua, guru, atau orang dewasa terpercaya<br>
+• Hubungi TePSA: 1500 771<br>
+• Konsultasi dengan guru BK/konselor sekolah<br><br>
+✅ <strong>Jaga Kesehatan Mental</strong><br>
+• Ingat, ini bukan kesalahan Anda<br>
+• Lakukan aktivitas yang menyenangkan<br>
+• Ceritakan perasaan pada orang yang dipercaya<br><br>
+<strong>📞 DARURAT: TePSA 1500 771 | WhatsApp: 081238888002</strong>`,
+
+                'privasi': `🔒 <strong>TIPS MENJAGA PRIVASI ONLINE</strong><br><br>
+<strong>🔑 MANAJEMEN AKUN:</strong><br>
+• Gunakan kata sandi kuat (minimal 8 karakter, kombinasi huruf, angka, simbol)<br>
+• Aktifkan verifikasi dua langkah<br>
+• Gunakan kata sandi berbeda untuk setiap akun penting<br><br>
+<strong>📱 PENGATURAN MEDIA SOSIAL:</strong><br>
+• Review pengaturan privasi secara berkala<br>
+• Batasi siapa yang bisa melihat postingan Anda<br>
+• Matikan lokasi/location sharing untuk postingan<br><br>
+<strong>🚫 INFORMASI YANG TIDAK BOLEH DIBAGIKAN:</strong><br>
+• Alamat rumah lengkap<br>
+• Nomor telepon pribadi<br>
+• Data rekening bank/kartu kredit<br>
+• Password dan PIN<br>
+• Foto KTP atau dokumen penting<br><br>
+<strong>🌐 BROWSING AMAN:</strong><br>
+• Gunakan mode privat/incognito untuk browsing sensitif<br>
+• Hati-hati dengan WiFi publik<br>
+• Periksa URL website sebelum memasukkan data`,
+
+                'media sosial': `📱 <strong>KEAMANAN MEDIA SOSIAL</strong><br><br>
+<strong>🔍 SEBELUM MEMOSTING:</strong><br>
+• Pikirkan: "Apakah konten ini aman dibagikan?"<br>
+• Pertimbangkan: "Apa dampaknya 5 tahun lagi?"<br>
+• Ingat: Sekali diinternet, selamanya diinternet<br><br>
+<strong>⚙️ PENGATURAN PRIVASI:</strong><br>
+• Atur profil menjadi privat<br>
+• Batasi yang bisa mengirimkan permintaan pertemanan<br>
+• Review daftar teman secara berkala<br>
+• Batasi yang bisa mengomentari postingan Anda<br><br>
+<strong>🛡️ INTERAKSI AMAN:</strong><br>
+• Hanya terima pertemanan dari orang yang dikenal<br>
+• Waspada terhadap akun tidak dikenal yang mengirim pesan<br>
+• Jangan klik link mencurigakan<br>
+• Laporkan konten yang tidak pantas<br><br>
+<strong>📊 PENGATURAN YANG DISARANKAN:</strong><br>
+• Matikan lokasi untuk postingan<br>
+• Batasi informasi profil yang terlihat publik<br>
+• Nonaktifkan tag otomatis<br>
+• Review izin aplikasi secara berkala`,
+
+                'anak': `👶 <strong>KEAMANAN INTERNET UNTUK ANAK-ANAK</strong><br><br>
+<strong>🛡️ UNTUK ORANG TUA:</strong><br>
+• Gunakan parental control software<br>
+• Buat aturan jelas tentang penggunaan internet<br>
+• Ajarkan anak tentang privasi online<br>
+• Monitor aktivitas online tanpa menginvasi privasi<br><br>
+<strong>📚 UNTUK ANAK:</strong><br>
+• Jangan bertemu dengan orang yang dikenal dari internet<br>
+• Laporkan konten atau perilaku mencurigakan<br>
+• Jangan bagikan password kepada siapapun<br>
+• Bicara dengan orang tua jika merasa tidak nyaman<br><br>
+<strong>⚙️ PENGATURAN YANG DISARANKAN:</strong><br>
+• Batasi screen time sesuai usia<br>
+• Aktifkan safe search di browser<br>
+• Gunakan kid-friendly browser<br>
+• Review history browsing secara berkala<br><br>
+<strong>🎯 TIPS PENDIDIKAN:</strong><br>
+• Ajarkan konsep "digital footprint"<br>
+• Latih anak untuk berpikir kritis terhadap konten online<br>
+• Diskusikan contoh kasus yang sesuai usia<br>
+• Bangun komunikasi terbuka tentang pengalaman online`,
+
+                'lapor': `📞 <strong>CARA MELAPORKAN KONTEN TIDAK PANTAS</strong><br><br>
+<strong>📱 PLATFORM MEDIA SOSIAL:</strong><br>
+• <strong>Facebook/Instagram</strong>: Tap "Laporkan" pada postingan/komentar<br>
+• <strong>Twitter</strong>: Klik "Laporkan Tweet" pada tweet yang menyinggung<br>
+• <strong>TikTok</strong>: Tap "Laporkan" pada video atau komentar<br>
+• <strong>WhatsApp</strong>: Blokir dan laporkan nomor tersebut<br><br>
+<strong>🏫 DI SEKOLAH:</strong><br>
+• Laporkan ke guru kelas atau guru BK<br>
+• Sampaikan ke wali kelas<br>
+• Gunakan mekanisme pelaporan yang disediakan sekolah<br><br>
+<strong>👮 INSTANSI RESMI:</strong><br>
+• <strong>TePSA</strong>: 1500 771 (Telepon Pelayanan Sosial Anak)<br>
+• <strong>Polisi</strong>: 110 (untuk kasus yang serius)<br>
+• <strong>KPAI</strong>: Komisi Perlindungan Anak Indonesia<br><br>
+<strong>📝 YANG PERLU DISIAPKAN:</strong><br>
+• Screenshot bukti pelanggaran<br>
+• URL/link konten yang dilaporkan<br>
+• Username akun pelaku<br>
+• Kronologi kejadian lengkap<br>
+• Tanggal dan waktu insiden`
+            };
+
+            return responses[topic] || `🤖 <strong>TOPIK TIDAK DIKENALI</strong><br><br>Silakan pilih topik yang tersedia dari button di bawah.`;
+        }
+
+        function clearChat() {
+            if (confirm('Apakah Anda yakin ingin menghapus seluruh percakapan?')) {
+                const messagesContainer = document.getElementById('chat-messages');
+                messagesContainer.innerHTML = '';
+                
+                // Tambahkan pesan awal kembali
+                const welcomeMessage = document.createElement('div');
+                welcomeMessage.className = 'message ai-message';
+                welcomeMessage.innerHTML = `
+                    <div class="message-text">
+                        🤖 <strong>Halo! Saya Asisten Keamanan Internet AI</strong><br><br>
+                        Saya di sini untuk membantu Anda dengan berbagai masalah keamanan internet. Silakan pilih topik yang ingin Anda pelajari dari button di bawah:
+                    </div>
+                    <div class="message-time">Sekarang</div>
+                `;
+                messagesContainer.appendChild(welcomeMessage);
+            }
+        }
+
+        // Animasi material sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const materialSections = document.querySelectorAll('.material-section');
+            materialSections.forEach((section, index) => {
+                setTimeout(() => {
+                    section.classList.add('animate-in');
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
